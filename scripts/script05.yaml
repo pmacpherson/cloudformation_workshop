@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: "Create an EC2 instance"
 Mappings: 
     RegionMap: 
-        us-east-1: 
+        us-east-2: 
             "32": "ami-6411e20d"
             "64": "ami-7a11e213"
         us-west-1: 
@@ -22,5 +22,5 @@ Resources:
         Type: "AWS::EC2::Instance"
         Properties:
             KeyName: "my-key-pair"
-            ImageId: "ami-75g0061f"
-            InstanceType: !FindInMap [RegionMap, !Ref "AWS::Region", "32"]
+            ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", "32"]
+            InstanceType: "m3.medium"
