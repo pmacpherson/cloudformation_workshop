@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Create an EC2 instance"
+Parameters:
+    pEnvironmentType:
+        Description: "Specifies if this a Dev, QA or Prod Environment"
+        Type: String
+        AllowedValues:
+            - "Dev"
+            - "Qa"
+            - "Prod"
+Conditions: 
+    ProdEnvironment: !Equals [ !Ref pEnvironmentType, "Prod" ]
+Resources:
+    myEC2Instance:
+        Type: AWS::EC2::Instance
+        Properties:
+            KeyName: "my-key-pair"
+            ImageId: "ami-75g0061f"
+            InstanceType: !If [ProdEnvironment, "m3.2xlarge", "m3.medium"]
+

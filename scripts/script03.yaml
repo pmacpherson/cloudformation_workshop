@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Create an EC2 instance"
+Parameters:
+    pInstanceType:
+        Description: "The EC2 instance type to launch"
+        Type: String
+        AllowedValues:
+            - "m1.micro"
+            - "m1.small"
+            - "m1.medium"
+Resources:
+    myEC2Instance:
+        Type: AWS::EC2::Instance
+        Properties:
+            KeyName: "my-key-pair"
+            ImageId: "ami-75g0061f"
+            InstanceType: !Ref pInstanceType
+Outputs:
+    InstancePublicDnsName:
+        Description: "The public DNS name of the newly created EC2 instance"
+        Value: !GetAtt myEC2Instance.PublicDnsName

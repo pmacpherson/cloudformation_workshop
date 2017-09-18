@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Create an EC2 instance"
+Resources:
+    myEC2Instance:
+        Type: "AWS::EC2::Instance"
+        Properties:
+            KeyName: "my-key-pair"
+            ImageId: "ami-75g0061f"
+            InstanceType: "m3.medium"

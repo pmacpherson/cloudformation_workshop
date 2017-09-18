@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Create an EC2 instance"
+Parameters:
+    pVpcId:
+        Description: "Choose VPC"
+        Type: AWS::EC2::VPC::Id
+    pSubnetIds:
+        Description: "Choose Subnets"
+        Type: AWS::EC2::Subnet::Id
+    pSecurityGroups:
+        Description: "Choose Security Groups"
+        Type: List<AWS::EC2::SecurityGroup::Id>
+    pKeyPair:
+        Description: "Choose Key Pair"
+        Type: AWS::EC2::KeyPair::KeyName
+Resources:
+    myEC2Instance:
+        Type: AWS::EC2::Instance
+        Properties:
+            KeyName: !Ref pKeyPair
+            ImageId: "ami-75g0061f"
+            InstanceType: "t2.micro"
+            SecurityGroupIds: !Ref "pSecurityGroups"
+            SubnetId: !Ref pSubnetIds
